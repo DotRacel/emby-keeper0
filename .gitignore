@@ -19,6 +19,7 @@ emby_user_device.csv
 # Venvs
 /venv
 /conda
+/.conda-test
 
 # Builds
 /windows/installer-script/python*
