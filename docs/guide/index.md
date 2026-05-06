@@ -18,7 +18,7 @@ Embykeeper 是一个专为 Emby 影视服务器设计的自动化工具. 它主�
 
 2. **定时保号** - 通过模拟登录和播放视频, 定期保持 Emby 账号的活跃状态, 避免因长期不使用而被回收.
 
-除此之外, Embykeeper 还提供了一些额外功能, 如自动监控抢注邀请码、自动水群、考核辅助等.
+除此之外, Embykeeper 还提供基于 Pyrogram 的二次开发框架, 便于维护新的签到器.
 
 项目支持 Python 运行、Docker 部署或云部署, 且完全开源, 不存储任何密钥或隐私信息, 经两年的开发已经在稳定和安全性方面有一定保证.
 
@@ -41,5 +41,3 @@ Embykeeper 是一个专为 Emby 影视服务器设计的自动化工具. 它主�
 本项目涉及的一切 Emby 服务器与 Embykeeper 开发团队无关, 在使用 Embykeeper 时造成的一切损失 (包括但不限于 Emby 或 Telegram 账号被封禁或被群封禁) 与开发团队无关.
 
 为了您的账号安全, 推荐使用小号. 运行该工具的 Telegram 账号若通过接码注册, 请使用一段时间再接入本工具.
-
-Embykeeper 将自动向 Embykeeper Auth Bot ([@embykeeper_auth_bot](https://t.me/embykeeper_auth_bot)) 发送信息, 用于在线验证码解析、日志记录、用户验证等, 内容不含任何密码或密钥信息, 或其他敏感隐私信息.
