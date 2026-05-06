@@ -20,12 +20,12 @@ jobs:
 
     - name: Create or update stable branch
       run: |
-        if [ $(git ls-remote --heads origin stable | wc -l) -eq 0 ]; then
+        if [ "$(git ls-remote --heads origin stable | wc -l)" -eq 0 ]; then
           git checkout -b stable
         else
           git checkout stable
         fi
-        git reset --hard ${GITHUB_REF#refs/tags/}
+        git reset --hard "${GITHUB_REF#refs/tags/}"
         git push origin stable --force
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
