@@ -41,7 +41,6 @@ class TemplateBCheckinConfig(BaseModel):
 
 class TemplateBCheckin(BotCheckin):
     init_first = True
-    additional_auth = ["prime"]
 
     async def init(self):
         try:

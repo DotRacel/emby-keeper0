@@ -274,15 +274,6 @@ class ConfigManager(ProxyBase):
         a.add(comment("启用机器人签到系列功能, 默认启用, 设置为 false 以禁用:"))
         a["checkiner"] = True
         a.add(nl())
-        a.add(comment("启用群组监控系列功能, 包括抢邀请码和回答问题等, 默认禁用, 设置为 true 以启用:"))
-        a["monitor"] = False
-        a.add(nl())
-        a.add(comment("启用自动水群系列功能, 风险较高, 默认禁用, 设置为 true 以启用:"))
-        a["messager"] = False
-        a.add(nl())
-        a.add(comment("启用定时抢注功能, 默认禁用, 设置为 true 以启用:"))
-        a["registrar"] = False
-        a.add(nl())
         doc["telegram"] = c
         doc.add(comment("针对该账号的独特设置, 如需使用请将该段取消注释并修改. 详见 site 项和 checkiner 项."))
         a_specific = item(
@@ -314,9 +305,6 @@ class ConfigManager(ProxyBase):
                         {
                             "phone": f'+861{fake.numerify(text="##########")}',
                             "checkiner": True,
-                            "monitor": False,
-                            "messager": False,
-                            "registrar": False,
                         }
                     ]
                 }
@@ -324,40 +312,6 @@ class ConfigManager(ProxyBase):
         )
         for line in a.as_string().strip().split("\n"):
             doc.add(comment(line))
-
-        doc.add(nl())
-        doc.add(comment("=" * 80))
-        doc.add(comment("定时抢注相关设置"))
-        doc.add(comment(f"详见: https://emby-keeper.github.io/guide/配置文件#registrar-子项"))
-        doc.add(comment("=" * 80))
-        c = item({})
-        c.add(nl())
-        c.add(comment("最大可同时进行的注册任务数:"))
-        c["concurrency"] = default_config.registrar.concurrency
-        c.add(nl())
-        c.add(comment("各站点注册设置:"))
-        c.add(nl())
-        c.add(comment("案例 (站点每天定时抢注):"))
-        registrar1_lines = [
-            '[registrar."templ_a<XiguaEmbyBot>"]',
-            'times = ["9:00AM", "9:00PM"]',
-            "timeout = 120",
-            "retries = 1",
-        ]
-        for line in registrar1_lines:
-            c.add(comment(line))
-        c.add(nl())
-        c.add(comment("案例 (站点间隔抢注):"))
-        registrar2_lines = [
-            '[registrar."templ_a<XiguaEmbyBot>"]',
-            "interval_minutes = 2",
-            "timeout = 120",
-            "retries = 1",
-        ]
-        for line in registrar2_lines:
-            c.add(comment(line))
-        doc["registrar"] = c
-        c.add(nl())
 
         doc.add(comment("=" * 80))
         doc.add(comment("站点相关设置"))
@@ -379,25 +333,22 @@ class ConfigManager(ProxyBase):
         for line in site.as_string().strip().split("\n"):
             doc.add(comment(line))
         doc.add(nl())
-        doc.add(comment("案例 (启用默认站点, 额外增加 temby 站点):"))
+        doc.add(comment("案例 (启用默认站点, 额外增加 cc 站点):"))
         site = item(
             {
                 "site": {
-                    "checkiner": ["+temby"],
+                    "checkiner": ["+cc"],
                 }
             }
         )
         for line in site.as_string().strip().split("\n"):
             doc.add(comment(line))
         doc.add(nl())
-        doc.add(comment("可以分别设置各个组件 (机器人签到 / 群组监控 / 自动水群) 的站点:"))
+        doc.add(comment("可以设置 Telegram 机器人签到启用的站点:"))
         site = item(
             {
                 "site": {
-                    "checkiner": ["-terminus", "-temby"],
-                    "monitor": ["-misty"],
-                    "messager": ["pornfans"],
-                    "registrar": ["templ_a<XiguaEmbyBot>"],
+                    "checkiner": ["-terminus", "-cc"],
                 }
             }
         )
@@ -408,9 +359,6 @@ class ConfigManager(ProxyBase):
             {
                 "site": {
                     "checkiner": get_names("checkiner"),
-                    "monitor": get_names("monitor"),
-                    "messager": get_names("messager"),
-                    "registrar": get_names("registrar"),
                 }
             }
         )
@@ -422,9 +370,6 @@ class ConfigManager(ProxyBase):
             {
                 "site": {
                     "checkiner": get_names("checkiner", allow_ignore=True),
-                    "monitor": get_names("monitor", allow_ignore=True),
-                    "messager": get_names("messager", allow_ignore=True),
-                    "registrar": get_names("registrar", allow_ignore=True),
                 }
             }
         )
@@ -465,17 +410,13 @@ class ConfigManager(ProxyBase):
         c["enabled"] = True
         c.add(comment("使用第几个 Telegram 账号进行推送, 从 1 开始计数:"))
         c["account"] = 1
-        c.add(
-            comment(
-                "默认情况下, 日志推送将在每天指定时间统一推送 (在 @embykeeper_bot 设置), 设置为 false 以立刻推送"
-            )
-        )
+        c.add(comment("默认情况下, 日志推送将在计划任务结束后统一推送, 设置为 false 以立刻推送"))
         c["immediately"] = False
         c.add(comment("默认情况下, 启动时立刻执行的一次签到/保活不会推送消息, 设置为 true 以推送"))
         c["once"] = False
-        c.add(comment("推送方式, 可选: telegram (默认), apprise"))
-        c["method"] = "telegram"
-        c.add(comment('Apprise 推送地址, 仅当 method = "apprise" 时有效'))
+        c.add(comment("推送方式, 当前仅支持 apprise"))
+        c["method"] = "apprise"
+        c.add(comment("Apprise 推送地址"))
         c["apprise_uri"] = ""
         doc["notifier"] = c
         doc.add(nl())

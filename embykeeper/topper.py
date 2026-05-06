@@ -85,7 +85,6 @@ async def topper():
         # Client状态
         if tele_used:
             from .telegram.pyrogram import Dispatcher
-            from .telegram.link import Link
 
             failed, pending, using, idle, queue_text = get_client_stats(ClientsSession.pool)
             client_stats = []
@@ -99,9 +98,6 @@ async def topper():
                 client_stats.append(f"Idle({idle})")
             if client_stats:
                 sys_stats.append((f"Tele: {'/'.join(client_stats)}{queue_text}", "bright_blue"))
-
-            if Link.post_count > 0:
-                sys_stats.append((f"Link: {Link.post_count}", "bright_blue"))
 
             if Dispatcher.updates_count > 0:
                 sys_stats.append((f"Updates: {Dispatcher.updates_count}", "bright_blue"))

@@ -6,7 +6,6 @@ from ._templ_a import TemplateACheckin
 class DPeakCheckin(TemplateACheckin):
     name = "DPeak"
     bot_username = "emby_dpeak_bot"
-    additional_auth = ["prime"]
 
     async def message_handler(self, client, message: Message):
         if message.text and "人机验证" in message.text:

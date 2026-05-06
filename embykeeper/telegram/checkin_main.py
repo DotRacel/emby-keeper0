@@ -15,7 +15,6 @@ from embykeeper.utils import AsyncTaskPool, show_exception
 
 from .checkiner import BaseBotCheckin
 from .dynamic import extract, get_cls, get_names
-from .link import Link
 from .session import ClientsSession
 from .pyrogram import Client
 
@@ -301,9 +300,6 @@ class CheckinerManager:
         if not clses:
             if site is not None:  # Only show warning if sites were specified but none were valid
                 log.warning("没有任何有效签到站点, 签到将跳过.")
-            return
-
-        if not await Link(client).auth("checkiner", log_func=log.error):
             return
 
         config_to_use = account.checkiner_config or config.checkiner

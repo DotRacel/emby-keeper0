@@ -15,7 +15,6 @@ __ignore__ = True
 class DPeakCheckin(BotCheckin):
     name = "DPeak"
     bot_username = "emby_dpeak_bot"
-    additional_auth = ["prime"]
 
     async def send_checkin(self, **kw):
         try:

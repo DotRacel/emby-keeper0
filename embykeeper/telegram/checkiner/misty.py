@@ -5,7 +5,7 @@ from pyrogram.types import Message
 
 from embykeeper.utils import async_partial
 
-from ..lock import misty_monitors, misty_locks
+from ..lock import misty_locks
 from . import BotCheckin
 
 
@@ -18,7 +18,6 @@ class MistyCheckin(BotCheckin):
     bot_checkin_caption_pat = "请输入验证码"
     bot_text_ignore = ["选择您要使用的功能", "欢迎使用", "选择功能"]
     bot_checked_keywords = ["距离上次签到未过"]
-    additional_auth = ["super"]
 
     async def start(self):
         misty_locks.setdefault(self.client.me.id, asyncio.Lock())
@@ -47,11 +46,3 @@ class MistyCheckin(BotCheckin):
         else:
             self.log.warning(f"签到失败: 无法进入签到页面.")
             await self.fail()
-
-    async def cleanup(self):
-        monitor = misty_monitors.get(self.client.me.id, None)
-        if monitor:
-            if not await monitor.init():
-                self.log.warning(f"发生冲突: 无法重置 Misty 开注监控状态.")
-                return False
-        return True

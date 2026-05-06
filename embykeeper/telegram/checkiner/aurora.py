@@ -18,7 +18,6 @@ class AuroraCheckin(BotCheckin):
     name = "Aurora Media"
     bot_username = "AuroraMedia1_bot"
     max_retries = 1
-    additional_auth = ["prime"]
 
     async def send_checkin(self, **kw):
         bot_peer = await self.client.resolve_peer(self.bot_username)

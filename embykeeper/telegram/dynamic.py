@@ -21,15 +21,6 @@ def get_spec(type: str) -> tuple[str, str]:
     if type == "checkiner":
         sub = "checkiner"
         suffix = "checkin"
-    elif type == "monitor":
-        sub = "monitor"
-        suffix = "monitor"
-    elif type == "messager":
-        sub = "messager"
-        suffix = "messager"
-    elif type == "registrar":
-        sub = "registrar"
-        suffix = "registrar"
     else:
         raise ValueError(f"{type} is not a valid service.")
     return sub, suffix
@@ -105,14 +96,6 @@ def get_cls(type: str, names: List[str] = None) -> List[Type]:
                     logger.warning(f'您配置的 "{type}" 不支持模板 "{match.group(1).upper()}".')
                     continue
                 if type == "checkiner":
-                    results.append(
-                        func(bot_username=match.group(2), name=f"@{match.group(2)}", templ_name=name)
-                    )
-                elif type == "monitor":
-                    results.append(func(name=f"{match.group(2)}", templ_name=name))
-                elif type == "messager":
-                    results.append(func(name=f"@{match.group(2)}", templ_name=name))
-                elif type == "registrar":
                     results.append(
                         func(bot_username=match.group(2), name=f"@{match.group(2)}", templ_name=name)
                     )

@@ -105,60 +105,10 @@ async def start_notifier():
             change_handle_notifier = config.on_change("notifier", _handle_config_change)
         return stream_log, stream_msg
 
-    # Default to telegram
-    accounts = config.telegram.account
-    account = None
-    if isinstance(notifier.account, int):
-        try:
-            account = accounts[notifier.account - 1]
-        except IndexError:
-            pass
-    elif isinstance(notifier.account, str):
-        for a in accounts:
-            if a.phone == notifier.account:
-                account = a
-                break
-
-    if account:
-        from .telegram.session import ClientsSession
-        from .telegram.log import TelegramStream
-
-        async with ClientsSession([account]) as clients:
-            async for a, tg in clients:
-                logger.info(f'计划任务的关键消息将通过 Embykeeper Bot 发送至 "{account.phone}" 账号.')
-                break
-            else:
-                logger.error(f'无法连接到 "{account.phone}" 账号, 无法发送日志推送.')
-                return None
-
-        stream_log = TelegramStream(
-            account=account,
-            instant=config.notifier.immediately,
-        )
-        handler_log_id = logger.add(
-            stream_log,
-            format=_formatter,
-            filter=_filter_log,
-        )
-        stream_msg = TelegramStream(
-            account=account,
-            instant=True,
-        )
-        handler_msg_id = logger.add(
-            stream_msg,
-            format=_formatter,
-            filter=_filter_msg,
-        )
-        if not change_handle_telegram:
-            change_handle_telegram = config.on_change("telegram.account", _handle_config_change)
-        if not change_handle_notifier:
-            change_handle_notifier = config.on_change("notifier", _handle_config_change)
-        return stream_log, stream_msg
-    else:
-        logger.error(f"无法找到消息推送所配置的 Telegram 账号.")
-        if not change_handle_notifier:
-            change_handle_notifier = config.on_change("notifier", _handle_config_change)
-        return None
+    logger.error("Telegram Bot 在线推送服务已移除, 请将 notifier.method 设置为 apprise.")
+    if not change_handle_notifier:
+        change_handle_notifier = config.on_change("notifier", _handle_config_change)
+    return None
 
 
 async def debug_notifier():
@@ -169,8 +119,6 @@ async def debug_notifier():
         debug_logger.bind(log=True).info("这是一条用于测试的日志消息, 使用 debug_notify 触发 😉.")
         if config.notifier.method == "apprise":
             logger.info("已尝试发送, 请至 Apprise 配置的接收端查看.")
-        elif config.notifier.method == "telegram":
-            logger.info("已尝试发送, 请至 @embykeeper_bot 查看.")
         await asyncio.gather(*[stream.join() for stream in streams if stream])
     else:
         logger.error("您当前没有配置有效的日志通知 (未启用日志通知或未配置账号), 请检查配置文件.")

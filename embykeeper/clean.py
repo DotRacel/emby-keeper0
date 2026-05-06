@@ -17,13 +17,7 @@ def get_cache_options():
         "4": {"name": "下次运行时间缓存", "prefix": "scheduler"},
         "5": {"name": "Emby 登陆凭据", "prefix": "emby.credential", "show_keys": True},
         "6": {"name": "Telegram 登陆凭据", "prefix": "telegram.session_str", "show_keys": True},
-        "7": {
-            "name": "其他缓存",
-            "children": {
-                "7.1": {"name": "monitor.pornfans.answer.qa", "prefix": "monitor.pornfans.answer.qa"}
-            },
-        },
-        "8": {"name": "所有缓存", "special": "all"},
+        "7": {"name": "所有缓存", "special": "all"},
     }
 
 

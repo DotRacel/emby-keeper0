@@ -11,7 +11,6 @@ from . import AnswerBotCheckin, MessageType
 class TanhuaCheckin(AnswerBotCheckin):
     name = "探花"
     bot_username = "TanhuaTvBot"
-    additional_auth = ["prime"]
     bot_checkin_cmd = ["/start"]
     templ_panel_keywords = ["请选择功能", "用户面板", "用户名称"]
     bot_success_keywords = ["签到获得积分"]

@@ -66,13 +66,7 @@ async def interactive_config(mongodb_url: str = None):
             pad + "请输入您的 Telegram 账号 (带国家区号) [dark_green](+861xxxxxxxxxx)[/]",
             console=console,
         )
-        monitor = Confirm.ask(
-            pad + "是否开启该账号的自动监控功能? (需要高级账号)", default=False, console=console
-        )
-        messager = Confirm.ask(
-            pad + "是否开启该账号的自动水群功能? (需要高级账号)", default=False, console=console
-        )
-        telegram_accounts.append(TelegramAccount(phone=phone, monitor=monitor, messager=messager))
+        telegram_accounts.append(TelegramAccount(phone=phone))
     if telegram_accounts:
         logger.info(f"即将尝试登录各账户并存储凭据, 请耐心等待.")
         await convert_session(telegram_accounts)
@@ -117,25 +111,18 @@ async def interactive_config(mongodb_url: str = None):
         emby_accounts.append(EmbyAccount(url=url, username=username, password=password, time=time))
     advanced = Confirm.ask(pad + "是否配置高级设置", default=False, console=console)
     if advanced:
-        while True:
-            logger.info("发送关键日志消息到以下哪个账户?")
-            logger.info(f"\t0. 不使用消息推送功能")
-            for i, t in enumerate(telegram_accounts):
-                logger.info(f"\t{i+1}. {t.phone}")
-            selected = IntPrompt.ask(pad + "请选择", default=1, console=console)
-            if selected:
-                if selected > 0:
-                    if selected <= len(telegram_accounts):
-                        cfg.notifier.enabled = True
-                        cfg.notifier.account = selected
-                        break
-                    else:
-                        logger.warning("选择的账号不存在, 请重新选择.")
-                else:
-                    cfg.notifier.enabled = False
-                    break
-            else:
-                logger.warning("选择的账号不存在, 请重新选择.")
+        apprise_uri = Prompt.ask(
+            pad + "请输入 Apprise 推送地址 (回车跳过日志推送)",
+            default="",
+            show_default=False,
+            console=console,
+        )
+        if apprise_uri:
+            cfg.notifier.enabled = True
+            cfg.notifier.method = "apprise"
+            cfg.notifier.apprise_uri = apprise_uri
+        else:
+            cfg.notifier.enabled = False
         cfg.checkiner.timeout = IntPrompt.ask(
             pad + "设置每个 Telegram Bot 签到的最大尝试时间 (秒)",
             default=cfg.checkiner.timeout,

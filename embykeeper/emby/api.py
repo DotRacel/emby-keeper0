@@ -267,10 +267,9 @@ class Emby:
                     elif resp.status_code == 403 and (
                         "cf-wrapper" in resp.text or "Just a moment" in resp.text
                     ):
-                        if self.cf_clearance:
-                            raise EmbyStatusError("访问失败: Cloudflare 验证码解析后依然有验证")
-                        await self.use_cfsolver()
-                        continue
+                        raise EmbyStatusError(
+                            "访问失败: 站点启用了 Cloudflare 验证, 在线验证码解析服务已移除"
+                        )
                     elif not resp.ok and not _login:
                         raise EmbyStatusError(f"访问失败: 异常 HTTP 代码 {resp.status_code} (URL = {url})")
                     else:
@@ -286,44 +285,8 @@ class Emby:
             raise EmbyConnectError(f'连接到 "{url}" 重试超限')
 
     async def use_cfsolver(self):
-        from embykeeper.cloudflare import get_cf_clearance
-
-        if not self.a.cf_challenge:
-            if self.proxy:
-                self.log.warning(
-                    f"该站点已启用 Cloudflare 保护, 请尝试浏览器以同样的代理访问: {self.a.url}"
-                    "以解除 Cloudflare IP 限制, 然后再次运行.\n"
-                    '或者, 高级用户可以使用 "cf_challenge = true" 配置项以允许尝试解析验证码.'
-                )
-            else:
-                self.log.warning(
-                    f'该站点已启用 Cloudflare 保护, 请使用 "cf_challenge = true" 配置项以允许尝试解析验证码.'
-                )
-        self.log.info(f"该站点已启用 Cloudflare 保护, 即将请求解析.")
-        if self.proxy:
-            if self.proxy.scheme != "socks5":
-                self.log.warning(
-                    f"该站点验证解析仅支持 SOCKS5 代理, 由于当前代理协议不支持, 将尝试不使用代理."
-                )
-                self.a.use_proxy = False
-            else:
-                self.log.info(
-                    f"验证码解析将使用代理, 可能导致解析失败, 若失败请使用"
-                    '"use_proxy = false" 以禁用该站点的代理.'
-                )
-        try:
-            cf_clearance, useragent = await get_cf_clearance(self.a.url, self.proxy)
-            if not cf_clearance:
-                self.log.warning(f"Cloudflare 验证码解析失败.")
-                return False
-            else:
-                self.cf_clearance = cf_clearance
-                self.useragent = useragent
-                return True
-        except Exception as e:
-            self.log.warning(f"Cloudflare 验证码解析时出现错误.")
-            show_exception(e, regular=False)
-            return False
+        self.log.warning("Cloudflare 在线验证码解析服务已移除, 无法自动跳过验证.")
+        return False
 
     async def login(self) -> dict:
         """Login to Emby server and get authentication token."""

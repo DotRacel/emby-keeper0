@@ -21,17 +21,12 @@ pad = " " * 23
 scheme_names = {
     "telegram": "Telegram",
     "telechecker": "每日签到",
-    "telemonitor": "消息监控",
-    "telemessager": "定时水群",
-    "teleregistrar": "定时抢注",
-    "telelink": "账号服务",
     "telenotifier": "消息推送",
     "embywatcher": "Emby保活",
     "subsonic": "Subsonic保活",
     "datamanager": "下载器",
     "debugtool": "开发工具",
     "config": "配置文件",
-    "cfsolver": "验证解析",
     "notifier": "消息推送",
 }
 
@@ -48,20 +43,17 @@ def formatter(record):
         else:
             return ""
 
-    if scheme in ("telegram", "telechecker", "telemonitor", "telemessager", "telelink"):
+    if scheme in ("telegram", "telechecker"):
         username = ifextra("username", " ([cyan]{}[/])")
         name = ifextra("name", "([magenta]{}[/]) ")
         return f"[blue]{scheme_names[scheme]}[/]{username}: {name}{{message}}"
-    elif scheme == "teleregistrar":
-        name = ifextra("name", " ([cyan]{}[/])")
-        return f"[blue]{scheme_names[scheme]}[/]{name}: {{message}}"
     elif scheme == "embywatcher":
         ident = ifextra(["username", "server"], " ([cyan]{}@{}[/])")
         return f"[blue]{scheme_names[scheme]}[/]{ident}: {{message}}"
     elif scheme == "subsonic":
         ident = ifextra(["username", "server"], " ([cyan]{}@{}[/])")
         return f"[blue]{scheme_names[scheme]}[/]{ident}: {{message}}"
-    elif scheme in ("datamanager", "debugtool", "config", "cfsolver", "notifier"):
+    elif scheme in ("datamanager", "debugtool", "config", "notifier"):
         return f"[blue]{scheme_names[scheme]}[/]: {{message}}"
     else:
         return "{message}"

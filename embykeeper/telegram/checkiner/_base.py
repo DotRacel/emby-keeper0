@@ -24,7 +24,7 @@ from pyrogram.handlers import EditedMessageHandler, MessageHandler
 from pyrogram.types import InlineKeyboardMarkup, Message, ReplyKeyboardMarkup
 from pyrogram.raw.functions.account import GetNotifySettings
 from pyrogram.raw.types import PeerNotifySettings, InputNotifyPeer
-from thefuzz import fuzz, process
+from thefuzz import fuzz
 
 from embykeeper import __name__ as __product__
 from embykeeper.ocr import CharRange, OCRService
@@ -33,7 +33,6 @@ from embykeeper.utils import show_exception, to_iterable, format_timedelta_human
 from embykeeper.config import config
 from embykeeper.runinfo import RunStatus
 from embykeeper.telegram.pyrogram import Client
-from embykeeper.telegram.link import Link
 
 __ignore__ = True
 
@@ -173,7 +172,6 @@ class BotCheckin(BaseBotCheckin):
     bot_too_many_tries_fail_keywords: Union[str, List[str]] = []  # 过多尝试将退出时检测的关键词 (暂不支持regex), 置空使用内置关键词表
     bot_fail_keywords: Union[str, List[str]] = []  # 签到错误将重试时检测的关键词 (暂不支持regex), 置空使用内置关键词表
     chat_name: str = None  # 在群聊中向机器人签到
-    additional_auth: List[str] = []  # 额外认证要求
     max_retries = None  # 验证码错误或网络错误时最高重试次数 (默认无限)
     checked_retries = None # 今日已签到时最高重试次数 (默认不重试)
     init_first: bool = False  # 先执行自定义初始化函数, 再进行加入群组分析
@@ -283,11 +281,6 @@ class BotCheckin(BaseBotCheckin):
                 return self.ctx.finish(RunStatus.IGNORE, "从未与该会话交流")
 
         while True:
-            if self.additional_auth:
-                for a in self.additional_auth:
-                    if not await Link(self.client).auth(a, log_func=self.log.info):
-                        return self.ctx.finish(RunStatus.IGNORE, "需要额外认证")
-
             if not self.init_first:
                 if not await self.init():
                     self.log.warning(f"初始化错误.")
@@ -623,112 +616,12 @@ class BotCheckin(BaseBotCheckin):
         if content:
             spec = content.replace("\n", " ")
             if unexpected:
-                self.log.warning(f"接收到异常返回信息: {spec}, 正在尝试智能回答.")
+                self.log.warning(f"接收到异常返回信息: {spec}, 在线智能回答服务已移除, 签到器将停止.")
+                await self.fail()
+                return False
             else:
-                self.log.info(f"正在使用智能接口回答问题.")
-            if (
-                message.reply_markup
-                and isinstance(message.reply_markup, InlineKeyboardMarkup)
-                and message.reply_markup.inline_keyboard
-            ):
-                buttons = [b.text for r in message.reply_markup.inline_keyboard for b in r]
-            else:
-                buttons = []
-            button_specs = [f"'{b}'" for b in buttons]
-            prompt = (
-                "我正在进行签到, 机器将显示指令或状态, 我需要通过回答问题以避免被识别为机器人或自动化程序, 并希望完成签到, 现在机器给出的值为:\n\n"
-                f"{content}\n\n"
-            )
-            if buttons:
-                prompt += (
-                    f"你可选: {', '.join(button_specs)} 中的一个作为回答.\n"
-                    "形式为: [CLICK]^XXX^, 其中XXX为回答\n"
-                )
-            prompt += (
-                "如果您认为不应该进行任何操作, 请输出 [NO_RESP], 禁止输出其他内容.\n"
-                "如果这是一个指令, 请输出您需要发送或点击的内容.\n"
-                "形式为: [SEND]^XXX^, 其中XXX为内容\n"
-                "不要说明这是一个指令, 不要说明需要发送文本消息, 仅仅按上述形式输出.\n"
-                "如果这是一个状态, 请输出 [IS_STATUS], 禁止输出其他内容."
-            )
-            for _ in range(3):
-                answer, by = await Link(self.client).gpt(prompt)
-                if answer:
-                    self.log.debug(f"智能回答 ({by}): {answer}")
-                    if "[NO_RESP]" in answer:
-                        if unexpected:
-                            self.log.info(f"智能回答认为无需进行操作, 为了避免风险签到器将停止.")
-                            await self.fail()
-                            return False
-                        else:
-                            self.log.info(f"智能回答认为无需进行操作.")
-                            return True
-                    elif "[IS_STATUS]" in answer:
-                        if unexpected:
-                            self.log.info(
-                                f"智能回答认为这是一条状态信息, 无需进行操作, 为了避免风险签到器将停止."
-                            )
-                            await self.fail()
-                            return False
-                        else:
-                            self.log.info(f"智能回答认为这是一条状态信息, 无需进行操作.")
-                            return True
-                    elif buttons and "[CLICK]" in answer:
-                        self.log.debug(f"当前按钮: {', '.join(button_specs)}")
-                        answer_content = re.search(r"\[CLICK\]\^(.+?)\^", answer)
-                        if not answer_content:
-                            if unexpected:
-                                self.log.info(f"智能回答失败, 为了避免风险签到器将停止.")
-                                await self.fail()
-                                return False
-                            else:
-                                self.log.warning(f"智能回答失败.")
-                                return False
-                        answer_content = answer_content.group(1)
-                        b, s = process.extractOne(answer_content, buttons, scorer=fuzz.partial_ratio)
-                        if s < 70:
-                            self.log.info(f"找不到对应回答的按钮, 正在重试.")
-                            await asyncio.sleep(3)
-                            continue
-                        else:
-                            try:
-                                await message.click(b)
-                            except (TimeoutError, MessageIdInvalid):
-                                pass
-                            if unexpected:
-                                self.log.warning(f'智能回答点击了按钮 "{b}", 为了避免风险签到器将停止.')
-                                await self.fail()
-                                return False
-                            else:
-                                self.log.info(f'智能回答点击了按钮 "{b}".')
-                                return True
-                    elif "[SEND]" in answer:
-                        answer_content = re.search(r"\[SEND\]\^(.+?)\^", answer)
-                        if not answer_content:
-                            if unexpected:
-                                self.log.warning(f"智能回答失败, 为了避免风险签到器将停止.")
-                                await self.fail()
-                                return False
-                            else:
-                                self.log.warning(f"智能回答失败.")
-                                return False
-                        answer_content = answer_content.group(1)
-                        await message.reply(answer_content)
-                        if unexpected:
-                            self.log.warning(f'智能回答回复了 "{answer_content}", 为了避免风险签到器将停止.')
-                            await self.fail()
-                            return False
-                        else:
-                            self.log.info(f'智能回答回复了 "{answer_content}".')
-                            return True
-            else:
-                if unexpected:
-                    self.log.warning(f"智能回答失败, 为了避免风险签到器将停止.")
-                    await self.fail()
-                    return False
-                else:
-                    self.log.warning(f"智能回答失败.")
-                    return False
+                self.log.warning(f"需要智能回答的问题无法离线处理: {spec}.")
+                return False
 
     async def retry(self):
         """执行重试, 重新发送签到指令."""
