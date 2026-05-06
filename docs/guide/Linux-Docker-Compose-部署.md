@@ -23,7 +23,7 @@ chmod +x /usr/local/bin/docker-compose
 您应该已经运行了:
 
 ```bash
-docker run -v $(pwd)/embykeeper:/app --rm -it --net=host embykeeper/embykeeper -i
+docker run -v $(pwd)/embykeeper:/app --rm -it --net=host ghcr.io/dotracel/emby-keeper0 -i
 ```
 
 您需要新建一个文件 `docker-compose.yml`, 此时您的目录结构如下:
@@ -43,7 +43,7 @@ version: '3'
 services:
   embykeeper:
     container_name: embykeeper
-    image: embykeeper/embykeeper
+    image: ghcr.io/dotracel/emby-keeper0
     restart: unless-stopped
     volumes:
       - ./embykeeper:/app
@@ -108,7 +108,7 @@ version: '3'
 services:
   embykeeper:
     container_name: embykeeper
-    image: embykeeper/embykeeper
+    image: ghcr.io/dotracel/emby-keeper0
     restart: unless-stopped
     volumes:
       - ./embykeeper:/app
@@ -135,14 +135,14 @@ services:
 
 ## 使用其他版本
 
-当您需要使用旧版本 (例如`v1.1.1`) 时, 您需要使用:
+当您需要使用某个已发布版本 (例如 `vX.Y.Z`) 时, 您需要使用:
 
 ```yaml
 version: '3'
 services:
   embykeeper:
     container_name: embykeeper
-    image: embykeeper/embykeeper:v1.1.1
+    image: ghcr.io/dotracel/emby-keeper0:vX.Y.Z
     ....
 ```
 
@@ -159,7 +159,7 @@ version: '3'
 services:
   embykeeper:
     container_name: embykeeper
-    image: embykeeper/embykeeper
+    image: ghcr.io/dotracel/emby-keeper0
     command: '-e'
     restart: unless-stopped
     volumes:
@@ -180,7 +180,7 @@ version: '3'
 services:
   embykeeper:
     container_name: embykeeper
-    image: embykeeper/embykeeper:main-dev
+    image: ghcr.io/dotracel/emby-keeper0:main-dev
     restart: unless-stopped
     volumes:
       - ./embykeeper:/app
@@ -206,7 +206,7 @@ docker-compose up -d
 
 ::::
 
-欢迎您在实现签到器后, 通过 [Pull requests](https://github.com/emby-keeper/emby-keeper/pulls) 向 Embykeeper 分享你的成果.
+欢迎您在实现签到器后, 通过 [Pull requests](https://github.com/DotRacel/emby-keeper0/pulls) 向 Embykeeper 分享你的成果.
 
 ## 部署在线控制台
 
@@ -228,7 +228,7 @@ version: '3'
 services:
   embykeeper:
     container_name: embykeeper
-    image: embykeeper/embykeeper
+    image: ghcr.io/dotracel/emby-keeper0
     restart: unless-stopped
     environment:
       - EK_WEBPASS=123456

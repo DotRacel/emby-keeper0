@@ -2,24 +2,28 @@
 
 ## 配置与部署
 
-Embykeeper 可以通过 `docker` 部署, 您需 [安装 docker](https://yeasy.gitbook.io/docker_practice/install), 然后执行:
+Embykeeper 可以通过 `docker` 部署, 镜像托管在 GitHub Packages: `ghcr.io/dotracel/emby-keeper0`. 您需 [安装 docker](https://yeasy.gitbook.io/docker_practice/install), 然后执行:
+
+::: tip 说明
+如果首次拉取时提示无权限, 请在仓库的 GitHub Packages 页面确认容器包已设为 Public, 或先执行 `docker login ghcr.io`.
+:::
 
 ```bash
-docker run -v $(pwd)/embykeeper:/app --rm -it --net=host embykeeper/embykeeper
+docker run -v $(pwd)/embykeeper:/app --rm -it --net=host ghcr.io/dotracel/emby-keeper0
 ```
 
 ::: tip 说明
 `--net=host` 用于连接主机上的代理, 若您不需要可以不使用这个选项.
 :::
 
-命令将会在 `embykeeper` 目录下生成模板 `config.toml` 文件 (您也可以从[这里](https://github.com/emby-keeper/emby-keeper/blob/main/config.example.toml)下载).
+命令将会在 `embykeeper` 目录下生成模板 `config.toml` 文件 (您也可以从[这里](https://github.com/DotRacel/emby-keeper0/blob/main/config.example.toml)下载).
 
 <!--@include: ./_简要配置.md-->
 
 随后, 再次执行命令:
 
 ```bash
-docker run -v $(pwd)/embykeeper:/app --rm -it --net=host embykeeper/embykeeper -i
+docker run -v $(pwd)/embykeeper:/app --rm -it --net=host ghcr.io/dotracel/emby-keeper0 -i
 ```
 
 ::: info 注意
@@ -27,7 +31,7 @@ docker run -v $(pwd)/embykeeper:/app --rm -it --net=host embykeeper/embykeeper -
 命令行中的 `-i` 指: 启动后立刻运行一次签到和保活, 如果您需要频繁多次运行, 请去掉该命令行参数运行:
 
 ```bash
-docker run -v $(pwd)/embykeeper:/app --rm -it --net=host embykeeper/embykeeper
+docker run -v $(pwd)/embykeeper:/app --rm -it --net=host ghcr.io/dotracel/emby-keeper0
 ```
 
 :::
@@ -65,21 +69,21 @@ tmux a
 当您需要更新版本时, 您需要按 `Ctrl + C` 停止现有程序, 然后执行:
 
 ```bash
-docker pull embykeeper/embykeeper
+docker pull ghcr.io/dotracel/emby-keeper0
 ```
 
 然后重新运行:
 
 ```bash
-docker run -v $(pwd)/embykeeper:/app --rm -it --net=host embykeeper/embykeeper -i
+docker run -v $(pwd)/embykeeper:/app --rm -it --net=host ghcr.io/dotracel/emby-keeper0 -i
 ```
 
 ## 使用其他版本
 
-当您需要使用旧版本 (例如`v1.1.1`) 时, 您可以在镜像名后追加版本号:
+当您需要使用某个已发布版本 (例如 `vX.Y.Z`) 时, 您可以在镜像名后追加版本号:
 
 ```bash
-docker run -v $(pwd)/embykeeper:/app --rm -it --net=host embykeeper/embykeeper:v1.1.1 -i
+docker run -v $(pwd)/embykeeper:/app --rm -it --net=host ghcr.io/dotracel/emby-keeper0:vX.Y.Z -i
 ```
 
 ## 命令行参数
@@ -91,7 +95,7 @@ Embykeeper 支持多样化的 [**⌨️ 命令行参数**](/guide/命令行参�
 当通过 Docker 部署时, 末尾的所有参数将被传递给 Embykeeper, 例如:
 
 ```bash
-docker run -v $(pwd)/embykeeper:/app --rm -it --net=host embykeeper/embykeeper -e
+docker run -v $(pwd)/embykeeper:/app --rm -it --net=host ghcr.io/dotracel/emby-keeper0 -e
 ```
 
 <!-- #endregion command -->
@@ -103,7 +107,7 @@ docker run -v $(pwd)/embykeeper:/app --rm -it --net=host embykeeper/embykeeper -
 Embykeeper 提供 `dev` 系列镜像, 您可以运行:
 
 ```bash
-docker run -v $(pwd)/embykeeper-src:/src -v $(pwd)/embykeeper:/app --rm -it --net=host embykeeper/embykeeper:main-dev -i
+docker run -v $(pwd)/embykeeper-src:/src -v $(pwd)/embykeeper:/app --rm -it --net=host ghcr.io/dotracel/emby-keeper0:main-dev -i
 ```
 
 这将在 `./embykeeper-src` 目录挂载源码, `./embykeeper` 目录挂载数据.
@@ -118,4 +122,4 @@ docker run -v $(pwd)/embykeeper-src:/src -v $(pwd)/embykeeper:/app --rm -it --ne
 
 ::::
 
-欢迎您在实现签到器后, 通过 [Pull requests](https://github.com/emby-keeper/emby-keeper/pulls) 向 Embykeeper 分享你的成果.
+欢迎您在实现签到器后, 通过 [Pull requests](https://github.com/DotRacel/emby-keeper0/pulls) 向 Embykeeper 分享你的成果.
