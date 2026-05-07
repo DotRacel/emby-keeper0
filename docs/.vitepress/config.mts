@@ -8,7 +8,7 @@ export default defineConfig({
   cleanUrls: true,
   head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
   sitemap: {
-    hostname: 'https://emby-keeper.github.io',
+    hostname: 'https://emby-keeper0.github.io',
   },
   // vite: {
   //   plugins: [
@@ -150,12 +150,12 @@ export default defineConfig({
     ],
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/emby-keeper/emby-keeper' },
+      { icon: 'github', link: 'https://github.com/DotRacel/emby-keeper0' },
     ],
 
     editLink: {
       pattern:
-        'https://github.com/emby-keeper/emby-keeper/edit/main/docs/:path',
+        'https://github.com/DotRacel/emby-keeper0/edit/main/docs/:path',
     },
   },
 });
