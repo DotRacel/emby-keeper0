@@ -43,9 +43,9 @@ docker run -v $(pwd)/embykeeper:/app --rm -it --net=host ghcr.io/dotracel/emby-k
 
 **注意**: 由于近期 Telegram 风控等级上升, 请尽可能先使用服务器所在地区的代理在手机上先登陆一次, 再使用 Embykeeper.
 
-您也可以使用 [Docker Compose 部署](https://emby-keeper0.github.io/guide/Linux-Docker-Compose-部署).
+您也可以使用 [Docker Compose 部署](https://dotracel.github.io/emby-keeper0/guide/Linux-Docker-Compose-部署).
 
-更多安装和配置方面的帮助请参考 [**📖 教程文档**](https://emby-keeper0.github.io/).
+更多安装和配置方面的帮助请参考 [**📖 教程文档**](https://dotracel.github.io/emby-keeper0/).
 
 本项目欢迎友善讨论与建议, 您可以通过 [Github Issue](https://github.com/DotRacel/emby-keeper0) 途径反馈, 并认可开发团队可以关闭与项目开发不直接相关的不友善讨论. 
 
@@ -59,8 +59,8 @@ docker run -v $(pwd)/embykeeper:/app --rm -it --net=host ghcr.io/dotracel/emby-k
   - 定时模拟账号登录视频播放
   - 播放时间与进度模拟
 - **Telegram 机器人签到**
-  - **更多签到站**可通过[模板配置](https://emby-keeper0.github.io/guide/配置文件#service-子项)或[二次开发](https://emby-keeper0.github.io/guide/参与开发#每日签到站点)实现.
+  - **更多签到站**可通过[模板配置](https://dotracel.github.io/emby-keeper0/guide/配置文件#service-子项)或[二次开发](https://dotracel.github.io/emby-keeper0/guide/参与开发#每日签到站点)实现.
 
-  - 测试中新签到器 (默认禁用, 请参考[教程文档](https://emby-keeper0.github.io/guide/配置文件#service-子项)启用):
+  - 测试中新签到器 (默认禁用, 请参考[教程文档](https://dotracel.github.io/emby-keeper0/guide/配置文件#service-子项)启用):
 
-  - 其他非 Emby 相关 (默认禁用, 请参考[教程文档](https://emby-keeper0.github.io/guide/配置文件#service-子项)启用):
+  - 其他非 Emby 相关 (默认禁用, 请参考[教程文档](https://dotracel.github.io/emby-keeper0/guide/配置文件#service-子项)启用):

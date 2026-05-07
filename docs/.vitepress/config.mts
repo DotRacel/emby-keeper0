@@ -1,14 +1,27 @@
 import { defineConfig } from 'vitepress';
 
+const base = '/emby-keeper0/';
+const withBase = (path: string) => `${base}${path.replace(/^\//, '')}`;
+
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   lang: 'zh-CN',
   title: 'Embykeeper',
   description: 'Emby 签到保号的自动执行工具',
+  base,
   cleanUrls: true,
-  head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
+  head: [['link', { rel: 'icon', href: withBase('/favicon.ico') }]],
   sitemap: {
-    hostname: 'https://emby-keeper0.github.io',
+    hostname: 'https://dotracel.github.io',
+    transformItems: (items) =>
+      items.map((item) => ({
+        ...item,
+        url: withBase(item.url),
+        links: item.links?.map((link) => ({
+          ...link,
+          url: withBase(link.url),
+        })),
+      })),
   },
   // vite: {
   //   plugins: [
