@@ -2,7 +2,7 @@
 
 ## 配置与部署
 
-Embykeeper 可以通过 `docker` 部署, 镜像托管在 GitHub Packages: `ghcr.io/dotracel/emby-keeper0`. 您需 [安装 docker](https://yeasy.gitbook.io/docker_practice/install), 然后执行:
+Embykeeper0 可以通过 `docker` 部署, 镜像托管在 GitHub Packages: `ghcr.io/dotracel/emby-keeper0`. 您需 [安装 docker](https://yeasy.gitbook.io/docker_practice/install), 然后执行:
 
 ::: tip 说明
 如果首次拉取时提示无权限, 请在仓库的 GitHub Packages 页面确认容器包已设为 Public, 或先执行 `docker login ghcr.io`.
@@ -36,9 +36,9 @@ docker run -v $(pwd)/embykeeper:/app --rm -it --net=host ghcr.io/dotracel/emby-k
 
 :::
 
-您将被询问设备验证码以登录, 登录成功后, Embykeeper 将首先执行一次签到和保活, 此后每日进行一次签到和保活.
+您将被询问设备验证码以登录, 登录成功后, Embykeeper0 将首先执行一次签到和保活, 此后每日进行一次签到和保活.
 
-恭喜您！您已经成功部署了 Embykeeper.
+恭喜您！您已经成功部署了 Embykeeper0.
 
 ::: info 支持
 
@@ -48,7 +48,7 @@ docker run -v $(pwd)/embykeeper:/app --rm -it --net=host ghcr.io/dotracel/emby-k
 
 ## 后台运行
 
-为了让 Embykeeper 长期后台运行, 您可以通过 `Ctrl + C` 停止, 然后运行:
+为了让 Embykeeper0 长期后台运行, 您可以通过 `Ctrl + C` 停止, 然后运行:
 
 ```bash
 tmux
@@ -88,11 +88,11 @@ docker run -v $(pwd)/embykeeper:/app --rm -it --net=host ghcr.io/dotracel/emby-k
 
 ## 命令行参数
 
-Embykeeper 支持多样化的 [**⌨️ 命令行参数**](/guide/命令行参数).
+Embykeeper0 支持多样化的 [**⌨️ 命令行参数**](/guide/命令行参数).
 
 <!-- #region command -->
 
-当通过 Docker 部署时, 末尾的所有参数将被传递给 Embykeeper, 例如:
+当通过 Docker 部署时, 末尾的所有参数将被传递给 Embykeeper0, 例如:
 
 ```bash
 docker run -v $(pwd)/embykeeper:/app --rm -it --net=host ghcr.io/dotracel/emby-keeper0 -e
@@ -104,7 +104,7 @@ docker run -v $(pwd)/embykeeper:/app --rm -it --net=host ghcr.io/dotracel/emby-k
 
 ## 修改程序源码, 并用 Docker 运行
 
-Embykeeper 提供 `dev` 系列镜像, 您可以运行:
+Embykeeper0 提供 `dev` 系列镜像, 您可以运行:
 
 ```bash
 docker run -v $(pwd)/embykeeper-src:/src -v $(pwd)/embykeeper:/app --rm -it --net=host ghcr.io/dotracel/emby-keeper0:main-dev -i
@@ -114,7 +114,7 @@ docker run -v $(pwd)/embykeeper-src:/src -v $(pwd)/embykeeper:/app --rm -it --ne
 
 您可以直接修改 `./embykeeper-src` 中的源码, 重启容器后程序将据此运行.
 
-例如, 只要您有基本的编程能力, 您就可以在 `./embykeeper-src/embykeeper/telechecker/bots` 中按照 [教程](/guide/参与开发#每日签到站点) 提供的方式非常容易地新建一个站点的签到.
+例如, 只要您有基本的编程能力, 您就可以在 `./embykeeper-src/embykeeper/telegram/checkiner` 中按照 [教程](/guide/参与开发#每日签到站点) 提供的方式非常容易地新建一个站点的签到.
 
 ::: tip 如何更新
 
@@ -122,4 +122,4 @@ docker run -v $(pwd)/embykeeper-src:/src -v $(pwd)/embykeeper:/app --rm -it --ne
 
 ::::
 
-欢迎您在实现签到器后, 通过 [Pull requests](https://github.com/DotRacel/emby-keeper0/pulls) 向 Embykeeper 分享你的成果.
+欢迎您在实现签到器后, 通过 [Pull requests](https://github.com/DotRacel/emby-keeper0/pulls) 向 Embykeeper0 分享你的成果.

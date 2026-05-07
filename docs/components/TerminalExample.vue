@@ -22,7 +22,7 @@ import {
     <vt-text class="terminal-line">
       <span class="info">INFO</span>
       <span class="content"
-        >欢迎使用 Embykeeper! 正在启动, 请稍等. 您可以通过 Ctrl+C
+        >欢迎使用 Embykeeper0! 正在启动, 请稍等. 您可以通过 Ctrl+C
         以结束运行.</span
       >
     </vt-text>

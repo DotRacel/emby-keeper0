@@ -4,26 +4,26 @@ import Logo from '../components/Logo.vue';
 
 </script>
 
-# 什么是 Embykeeper?
+# 什么是 Embykeeper0?
 
 <p align="center">
-  <a href='https://github.com/emby-keeper/emby-keeper'>
+  <a href='https://github.com/DotRacel/emby-keeper0'>
     <Logo />
   </a>
 </p>
 
-Embykeeper 是一个专为 Emby 影视服务器设计的自动化工具. 它主要提供两大核心功能:
+Embykeeper0 是一个专为 Emby 影视服务器设计的自动化工具. 它主要提供两大核心功能:
 
 1. **自动签到** - 可以自动完成多个站点的 Telegram 机器人每日签到, 以获取积分.
 
 2. **定时保号** - 通过模拟登录和播放视频, 定期保持 Emby 账号的活跃状态, 避免因长期不使用而被回收.
 
-除此之外, Embykeeper 还提供基于 Pyrogram 的二次开发框架, 便于维护新的签到器.
+除此之外, Embykeeper0 还提供基于 Pyrogram 的二次开发框架, 便于维护新的签到器.
 
-项目支持 Python 运行、Docker 部署或云部署, 且完全开源, 不存储任何密钥或隐私信息, 经两年的开发已经在稳定和安全性方面有一定保证.
+项目目前推荐 Docker 部署或云部署, 且完全开源, 不存储任何密钥或隐私信息, 经两年的开发已经在稳定和安全性方面有一定保证.
 
 ::: tip 快速安装
-希望安装 Embykeeper? 请前往 [**🚀 安装指南**](/guide/安装指南.md).
+希望安装 Embykeeper0? 请前往 [**🚀 安装指南**](/guide/安装指南.md).
 :::
 
 ## 设计初衷与声明
@@ -38,6 +38,6 @@ Embykeeper 是一个专为 Emby 影视服务器设计的自动化工具. 它主�
 
 ## 账户安全
 
-本项目涉及的一切 Emby 服务器与 Embykeeper 开发团队无关, 在使用 Embykeeper 时造成的一切损失 (包括但不限于 Emby 或 Telegram 账号被封禁或被群封禁) 与开发团队无关.
+本项目涉及的一切 Emby 服务器与 Embykeeper0 开发团队无关, 在使用 Embykeeper0 时造成的一切损失 (包括但不限于 Emby 或 Telegram 账号被封禁或被群封禁) 与开发团队无关.
 
 为了您的账号安全, 推荐使用小号. 运行该工具的 Telegram 账号若通过接码注册, 请使用一段时间再接入本工具.

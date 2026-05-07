@@ -6,7 +6,7 @@ const withBase = (path: string) => `${base}${path.replace(/^\//, '')}`;
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   lang: 'zh-CN',
-  title: 'Embykeeper',
+  title: 'Embykeeper0',
   description: 'Emby 签到保号的自动执行工具',
   base,
   cleanUrls: true,
@@ -102,29 +102,13 @@ export default defineConfig({
       {
         text: '开始使用',
         items: [
-          { text: '🏡 什么是 Embykeeper?', link: '/guide/' },
+          { text: '🏡 什么是 Embykeeper0?', link: '/guide/' },
           { text: '🎬 支持的站点', link: '/guide/支持的站点' },
           { text: '🚀 安装指南', link: '/guide/安装指南' },
+          { text: '🐳 Docker 部署', link: '/guide/Linux-Docker-部署' },
           {
-            text: '🐧 Linux 安装',
-            collapsed: true,
-            items: [
-              { text: '🐳 Docker 部署', link: '/guide/Linux-Docker-部署' },
-              {
-                text: '📚 Docker Compose 部署',
-                link: '/guide/Linux-Docker-Compose-部署',
-              },
-              { text: '🏗️ 从源码构建', link: '/guide/Linux-从源码构建' },
-              { text: '📦 PyPI 安装', link: '/guide/Linux-从-PyPI-安装' },
-            ],
-          },
-          {
-            text: '💻 Windows 安装',
-            collapsed: true,
-            items: [
-              { text: '⌨️ 自动安装脚本', link: '/guide/Windows-通过脚本安装' },
-              { text: '🖱️ 安装包', link: '/guide/Windows-通过安装包安装' },
-            ],
+            text: '📚 Docker Compose 部署',
+            link: '/guide/Linux-Docker-Compose-部署',
           },
           { text: '🪐 在线部署', link: '/guide/在线部署' },
           { text: '❔ 常见问题', link: '/guide/常见问题' },
@@ -139,16 +123,11 @@ export default defineConfig({
             items: [
               { text: '🎬 自动保活', link: '/guide/功能说明-自动保活' },
               { text: '📅 每日签到', link: '/guide/功能说明-每日签到' },
-              { text: '👀 群组监控', link: '/guide/功能说明-群组监控' },
-              { text: '🕒 定时抢注', link: '/guide/功能说明-定时抢注' },
-              { text: '💬 自动水群', link: '/guide/功能说明-自动水群' },
-              { text: '📝 考核辅助', link: '/guide/功能说明-考核辅助' },
               { text: '🔔 日志推送', link: '/guide/功能说明-日志推送' },
             ],
           },
           { text: '🔧 配置文件', link: '/guide/配置文件' },
           { text: '⌨️ 命令行参数', link: '/guide/命令行参数' },
-          { text: '👑 高级用户', link: '/guide/高级用户' },
         ],
       },
       {

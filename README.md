@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href='https://github.com/DotRacel/emby-keeper0'>
-    <img src="https://github.com/DotRacel/emby-keeper0/raw/main/images/logo.svg" alt="Embykeeper" />
+    <img src="https://github.com/DotRacel/emby-keeper0/raw/main/images/logo.svg" alt="Embykeeper0" />
   </a>
 </p>
 <p align="center">
@@ -21,11 +21,11 @@ Embykeeper0 是一个 Emby 影视服务器签到保号的自动执行工具, 它
 
 除此之外, Embykeeper0 还提供基于 Pyrogram 的二次开发框架, 便于维护新的签到器.
 
-项目支持 Python 运行、Docker 部署或云部署, 且完全开源, 不存储任何密钥或隐私信息, 经两年的开发已经在稳定和安全性方面有一定保证.
+项目目前推荐 Docker 部署或云部署, 且完全开源, 不存储任何密钥或隐私信息, 经两年的开发已经在稳定和安全性方面有一定保证.
 
 ## 声明
 
-本分支为原项目 [Embykeeper](https://github.com/emby-keeper/emby-keeper) 的去中心化版本，去除了付费需要的功能，移除了免费功能（如 `Checkiner`）对开发者服务器的依赖。由于原项目开发者不再活跃维护本项目，因此欢迎针对新功能的 PR.
+本项目是去中心化维护版本，去除了付费功能，移除了免费功能（如 `Checkiner`）对开发者服务器的依赖。欢迎针对新功能的 PR.
 
 本项目涉及的一切 Emby 服务器与 Embykeeper0 开发团队无关, 在使用 Embykeeper0 时造成的一切损失 (包括但不限于 Emby 或 Telegram 账号被封禁或被群封禁) 与开发团队无关. 为了您的账号安全, 推荐使用小号. 运行该工具的 Telegram 账号若通过接码注册, 请使用一段时间再接入本工具.
 
@@ -41,17 +41,17 @@ Embykeeper0 目前仅支持 Docker 部署, 请点击下方按钮开始部署:
 docker run -v $(pwd)/embykeeper:/app --rm -it --net=host ghcr.io/dotracel/emby-keeper0 -i
 ```
 
-**注意**: 由于近期 Telegram 风控等级上升, 请尽可能先使用服务器所在地区的代理在手机上先登陆一次, 再使用 Embykeeper.
+**注意**: 由于近期 Telegram 风控等级上升, 请尽可能先使用服务器所在地区的代理在手机上先登陆一次, 再使用 Embykeeper0.
 
 您也可以使用 [Docker Compose 部署](https://dotracel.github.io/emby-keeper0/guide/Linux-Docker-Compose-部署).
 
 更多安装和配置方面的帮助请参考 [**📖 教程文档**](https://dotracel.github.io/emby-keeper0/).
 
-本项目欢迎友善讨论与建议, 您可以通过 [Github Issue](https://github.com/DotRacel/emby-keeper0) 途径反馈, 并认可开发团队可以关闭与项目开发不直接相关的不友善讨论. 
+本项目欢迎友善讨论与建议, 您可以通过 [GitHub Issue](https://github.com/DotRacel/emby-keeper0/issues) 途径反馈, 并认可开发团队可以关闭与项目开发不直接相关的不友善讨论. 
 
 ## 运行截图
 
-![Screenshot](https://github.com/emby-keeper/emby-keeper/raw/main/images/screenshot.png)
+![Screenshot](https://github.com/DotRacel/emby-keeper0/raw/main/images/screenshot.png)
 
 ## 完整功能支持列表
 

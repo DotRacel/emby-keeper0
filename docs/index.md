@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Embykeeper 是一个Emby 影视服务器签到保号的自动执行工具, 提供 TG 机器人签到和 Emby 服务器保活功能.
+      content: Embykeeper0 是一个Emby 影视服务器签到保号的自动执行工具, 提供 TG 机器人签到和 Emby 服务器保活功能.
   - - meta
     - name: keywords
-      content: Embykeeper, Emby, 签到, 保活, Telegram, 公益服
+      content: Embykeeper0, Emby, 签到, 保活, Telegram, 公益服
   - - meta
     - name: google-site-verification
       content: 2Rwsm1-SrtpbMLAgt249LnzWKqx2bbuNVuE-5LiU4dc
@@ -14,15 +14,15 @@ head:
 layout: home
 
 hero:
-  name: 'Embykeeper'
+  name: 'Embykeeper0'
   text: 'Emby 保号自动化'
   tagline: Emby 保活 + TG 签到
   image:
     src: /logo.webp
-    alt: Embykeeper
+    alt: Embykeeper0
   actions:
     - theme: brand
-      text: Embykeeper 是什么?
+      text: Embykeeper0 是什么?
       link: /guide/
     - theme: alt
       text: 快速安装
@@ -31,8 +31,8 @@ hero:
       text: 配置文档
       link: /guide/配置文件
     - theme: alt
-      text: Github
-      link: https://github.com/emby-keeper/emby-keeper
+      text: GitHub
+      link: https://github.com/DotRacel/emby-keeper0
 
 features:
   - icon:
@@ -49,7 +49,7 @@ features:
     details: 模拟在 Telegram 机器人每日签到, 已支持 50+ 站点.
   - icon: 🪐
     title: 支持云部署
-    details: 支持 Huggingface 或 Render 免费云部署, 无需服务器, 支持网页管理.
+    details: 支持 Koyeb 或 Render 免费云部署, 无需服务器, 支持网页管理.
   - icon: 🛡️
     title: 高稳定性
     details: 已持续开发改进 2 年, 签到和保号已尽可能与真人操作一致, 不容易被识别.
