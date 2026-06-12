@@ -157,12 +157,12 @@ class ConfigManager(ProxyBase):
         doc = document()
         doc.add(comment("这是一个配置文件范例."))
         doc.add(comment("所有账户信息为生成, 请填写您的账户信息."))
-        doc.add(comment(f"查看帮助与详情: {__url__}#安装与使用"))
+        doc.add(comment(f"查看帮助与详情: {__url__}/guide/安装指南"))
         doc.add(nl())
 
         doc.add(comment("=" * 80))
         doc.add(comment("Emby 保活相关设置"))
-        doc.add(comment(f"详见: https://emby-keeper.github.io/guide/配置文件#emby-子项"))
+        doc.add(comment(f"详见: {__url__}/guide/配置文件#emby-子项"))
         doc.add(comment("=" * 80))
         c = item({})
         c.add(nl())
@@ -181,7 +181,7 @@ class ConfigManager(ProxyBase):
         c.add(nl())
         c.add(comment("=" * 80))
         c.add(comment("Emby 账号, 您可以重复该片段多次以增加多个账号."))
-        c.add(comment(f"详见: https://emby-keeper.github.io/guide/配置文件#emby-account-子项"))
+        c.add(comment(f"详见: {__url__}/guide/配置文件#emby-account-子项"))
         c.add(comment("=" * 80))
         c["account"] = [{}]
         a: InlineTable = c["account"][0]
@@ -232,7 +232,7 @@ class ConfigManager(ProxyBase):
         doc.add(nl())
         doc.add(comment("=" * 80))
         doc.add(comment("Telegram 机器人签到相关设置"))
-        doc.add(comment(f"详见: https://emby-keeper.github.io/guide/配置文件#checkiner-子项"))
+        doc.add(comment(f"详见: {__url__}/guide/配置文件#checkiner-子项"))
         doc.add(comment("=" * 80))
         c = item({})
         c.add(nl())
@@ -262,7 +262,7 @@ class ConfigManager(ProxyBase):
 
         c.add(comment("=" * 80))
         c.add(comment("Telegram 账号, 您可以重复该片段多次以增加多个账号."))
-        c.add(comment(f"详见: https://emby-keeper.github.io/guide/配置文件#telegram-account-子项"))
+        c.add(comment(f"详见: {__url__}/guide/配置文件#telegram-account-子项"))
         c.add(comment("=" * 80))
         c = item({"account": [{}]})
         a: InlineTable = c["account"][0]
@@ -317,7 +317,7 @@ class ConfigManager(ProxyBase):
         doc.add(comment("站点相关设置"))
         doc.add(comment("当您需要禁用某些站点时, 请将该段取消注释并修改."))
         doc.add(comment(f"该部分内容是根据 {__product__.capitalize()} {__version__} 生成的."))
-        doc.add(comment(f"详见: https://emby-keeper.github.io/guide/配置文件#site-子项"))
+        doc.add(comment(f"详见: {__url__}/guide/配置文件#site-子项"))
         doc.add(comment("=" * 80))
         doc.add(nl())
         doc.add(comment(f'使用 "all" 代表所有签到器, "sgk" 以代表所有社工库签到器.'))
@@ -383,7 +383,7 @@ class ConfigManager(ProxyBase):
         doc.add(
             comment("代理设置, Emby 和 Telegram 均将通过此代理连接, 服务器位于国内时请配置代理并取消注释")
         )
-        doc.add(comment(f"详见: https://emby-keeper.github.io/guide/配置文件#proxy-子项"))
+        doc.add(comment(f"详见: {__url__}/guide/配置文件#proxy-子项"))
         doc.add(comment("=" * 80))
         doc.add(nl())
         proxy = item(
@@ -402,12 +402,12 @@ class ConfigManager(ProxyBase):
 
         doc.add(comment("=" * 80))
         doc.add(comment("日志推送相关设置"))
-        doc.add(comment(f"详见: https://emby-keeper.github.io/guide/配置文件#notifier-子项"))
+        doc.add(comment(f"详见: {__url__}/guide/配置文件#notifier-子项"))
         doc.add(comment("=" * 80))
         c = item({})
         c.add(nl())
-        c.add(comment("启用签到/保活结果的日志推送:"))
-        c["enabled"] = True
+        c.add(comment("启用签到/保活结果的日志推送 (设为 true 以启用, 需同时填写下方 apprise_uri):"))
+        c["enabled"] = False
         c.add(comment("使用第几个 Telegram 账号进行推送, 从 1 开始计数:"))
         c["account"] = 1
         c.add(comment("默认情况下, 日志推送将在计划任务结束后统一推送, 设置为 false 以立刻推送"))
@@ -423,7 +423,7 @@ class ConfigManager(ProxyBase):
 
         doc.add(comment("=" * 80))
         doc.add(comment("Subsonic 保活相关设置 (包括 Navidrome 和其他支持 Subsonic API 的音乐服站点)"))
-        doc.add(comment(f"详见: https://emby-keeper.github.io/guide/配置文件#subsonic-子项"))
+        doc.add(comment(f"详见: {__url__}/guide/配置文件#subsonic-子项"))
         doc.add(comment("=" * 80))
         c = item({})
         c.add(nl())
@@ -444,7 +444,7 @@ class ConfigManager(ProxyBase):
         doc.add(nl())
         doc.add(comment("=" * 80))
         doc.add(comment("Subsonic 账号, 您可以重复该片段多次以增加多个账号, 如需使用, 请取消注释."))
-        doc.add(comment(f"详见: https://emby-keeper.github.io/guide/配置文件#subsonic-account-子项"))
+        doc.add(comment(f"详见: {__url__}/guide/配置文件#subsonic-account-子项"))
         doc.add(comment("=" * 80))
         doc.add(nl())
 

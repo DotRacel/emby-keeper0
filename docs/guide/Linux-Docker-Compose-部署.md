@@ -39,7 +39,6 @@ docker run -v $(pwd)/embykeeper:/app --rm -it --net=host ghcr.io/dotracel/emby-k
 然后向 `docker-compose.yml` 写入:
 
 ```yaml
-version: '3'
 services:
   embykeeper:
     container_name: embykeeper
@@ -104,7 +103,6 @@ docker-compose up -d
 在您的 `docker-compose.yml` 中添加 watchtower 服务：
 
 ```yaml
-version: '3'
 services:
   embykeeper:
     container_name: embykeeper
@@ -138,7 +136,6 @@ services:
 当您需要使用某个已发布版本 (例如 `vX.Y.Z`) 时, 您需要使用:
 
 ```yaml
-version: '3'
 services:
   embykeeper:
     container_name: embykeeper
@@ -155,7 +152,6 @@ Embykeeper0 支持多样化的 [**⌨️ 命令行参数**](/guide/命令行参�
 当通过 Docker Compose 部署时, 您需要通过修改 `docker-compose.yml` 中的 `command` 项, 从而调整命令行参数, 例如:
 
 ```yaml
-version: '3'
 services:
   embykeeper:
     container_name: embykeeper
@@ -176,7 +172,6 @@ services:
 Embykeeper0 提供 `dev` 系列镜像, 您需要新建一个文件 `docker-compose.yml`:
 
 ```yaml
-version: '3'
 services:
   embykeeper:
     container_name: embykeeper
@@ -198,48 +193,12 @@ docker-compose up -d
 
 您可以直接修改 `./embykeeper-src` 中的源码, 重启容器后程序将据此运行.
 
-例如, 只要您有基本的编程能力, 您就可以在 `./embykeeper-src/embykeeper/telegram/checkiner` 中按照 [教程](/guide/参与开发#每日签到站点) 提供的方式非常容易地新建一个站点的签到.
+例如, 只要您有基本的编程能力, 您就可以在 `./embykeeper-src/embykeeper/telegram/checkiner` 中按照 [教程](/guide/参与开发#扩展签到器) 提供的方式非常容易地新建一个站点的签到.
 
 ::: tip 如何更新
 
-如果您需要更新 `dev` 系列构象, 您需要直接在 `./embykeeper-src/` 目录中使用 `git pull`.
+如果您需要更新 `dev` 系列镜像, 您需要直接在 `./embykeeper-src/` 目录中使用 `git pull`.
 
-::::
+:::
 
 欢迎您在实现签到器后, 通过 [Pull requests](https://github.com/DotRacel/emby-keeper0/pulls) 向 Embykeeper0 分享你的成果.
-
-## 部署在线控制台
-
-当 `EK_WEBPASS` 环境变量被设定时, 将启动在线控制台, 默认的命令行将不会启动.
-
-::: warning 注意
-自部署不推荐使用在线控制台, 目前的在线控制台实际上是控制台的在线版, 并不提供高级美观直观的界面.
-之后, 我们会考虑在线界面的开发.
-:::
-
-::: warning 注意
-在自部署模式下, 配置文件不生效, 需要通过环境变量输入配置.
-:::
-
-请使用 `docker-compose.yml`:
-
-```yaml
-version: '3'
-services:
-  embykeeper:
-    container_name: embykeeper
-    image: ghcr.io/dotracel/emby-keeper0
-    restart: unless-stopped
-    environment:
-      - EK_WEBPASS=123456
-    ports:
-      - 80:1818
-```
-
-并运行:
-
-```bash
-docker-compose up -d
-```
-
-将在 80 端口启动在线控制台 HTTP 服务.

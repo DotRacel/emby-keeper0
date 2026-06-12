@@ -355,7 +355,7 @@ def format_errors(e: ValidationError) -> str:
         error_messages.append(f"{location}:")
         error_messages.append(f"    {msg}")
 
-    error_messages.append("详细说明请访问: https://emby-keeper.github.io/guide/配置文件")
+    error_messages.append("详细说明请访问: https://dotracel.github.io/emby-keeper0/guide/配置文件")
     return "\n".join(error_messages)
 
 

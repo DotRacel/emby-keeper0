@@ -15,6 +15,10 @@ COPY --from=builder /src/scripts/docker-entrypoint.sh /entrypoint.sh
 ENV TZ="Asia/Shanghai"
 ENV EK_IN_DOCKER="1"
 
+LABEL org.opencontainers.image.source="https://github.com/DotRacel/emby-keeper0" \
+      org.opencontainers.image.description="Emby 签到保号自动化工具 (去中心化维护版)" \
+      org.opencontainers.image.licenses="GPL-3.0"
+
 WORKDIR /app
 RUN chmod +x /entrypoint.sh \
     && touch config.toml

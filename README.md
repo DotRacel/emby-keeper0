@@ -1,4 +1,4 @@
-[![build status](https://img.shields.io/github/actions/workflow/status/DotRacel/emby-keeper0/ci.yml?branch=main)](https://github.com/DotRacel/emby-keeper0/actions/workflows/ci.yml) [![pypi badge](https://img.shields.io/pypi/v/embykeeper)](https://pypi.org/project/embykeeper/) [![container](https://img.shields.io/badge/GHCR-ghcr.io%2Fdotracel%2Femby--keeper0-blue)](https://github.com/DotRacel/emby-keeper0/pkgs/container/emby-keeper0) [![license badge](https://img.shields.io/github/license/DotRacel/emby-keeper0)](https://github.com/DotRacel/emby-keeper0/blob/main/LICENSE) 
+[![build status](https://img.shields.io/github/actions/workflow/status/DotRacel/emby-keeper0/ci.yml?branch=main)](https://github.com/DotRacel/emby-keeper0/actions/workflows/ci.yml) [![container](https://img.shields.io/badge/GHCR-ghcr.io%2Fdotracel%2Femby--keeper0-blue)](https://github.com/DotRacel/emby-keeper0/pkgs/container/emby-keeper0) [![license badge](https://img.shields.io/github/license/DotRacel/emby-keeper0)](https://github.com/DotRacel/emby-keeper0/blob/main/LICENSE) 
 
 <p align="center">
   <a href='https://github.com/DotRacel/emby-keeper0'>
@@ -21,7 +21,7 @@ Embykeeper0 是一个 Emby 影视服务器签到保号的自动执行工具, 它
 
 除此之外, Embykeeper0 还提供基于 Pyrogram 的二次开发框架, 便于维护新的签到器.
 
-项目目前推荐 Docker 部署或云部署, 且完全开源, 不存储任何密钥或隐私信息, 经两年的开发已经在稳定和安全性方面有一定保证.
+项目目前推荐 Docker 部署, 且完全开源, 不存储任何密钥或隐私信息, 在稳定性和安全性方面有较好保证.
 
 ## 声明
 
@@ -35,7 +35,7 @@ Embykeeper0 是一个 Emby 影视服务器签到保号的自动执行工具, 它
 
 ## 安装与使用
 
-Embykeeper0 目前仅支持 Docker 部署, 请点击下方按钮开始部署:
+Embykeeper0 目前仅支持 Docker 部署, 请在已安装 Docker 的服务器上执行以下命令:
 
 ```bash
 docker run -v $(pwd)/embykeeper:/app --rm -it --net=host ghcr.io/dotracel/emby-keeper0 -i
@@ -59,8 +59,6 @@ docker run -v $(pwd)/embykeeper:/app --rm -it --net=host ghcr.io/dotracel/emby-k
   - 定时模拟账号登录视频播放
   - 播放时间与进度模拟
 - **Telegram 机器人签到**
-  - **更多签到站**可通过[模板配置](https://dotracel.github.io/emby-keeper0/guide/配置文件#service-子项)或[二次开发](https://dotracel.github.io/emby-keeper0/guide/参与开发#每日签到站点)实现.
-
-  - 测试中新签到器 (默认禁用, 请参考[教程文档](https://dotracel.github.io/emby-keeper0/guide/配置文件#service-子项)启用):
-
-  - 其他非 Emby 相关 (默认禁用, 请参考[教程文档](https://dotracel.github.io/emby-keeper0/guide/配置文件#service-子项)启用):
+  - 已支持 100+ 站点, 完整列表见 [支持的站点](https://dotracel.github.io/emby-keeper0/guide/支持的站点).
+  - **更多签到站**可通过[模板配置](https://dotracel.github.io/emby-keeper0/guide/配置文件#site-子项)或[二次开发](https://dotracel.github.io/emby-keeper0/guide/参与开发#扩展签到器)实现.
+  - 部分测试中或已停用的签到器默认禁用, 可参考[配置文件](https://dotracel.github.io/emby-keeper0/guide/配置文件#site-子项)按需启用.

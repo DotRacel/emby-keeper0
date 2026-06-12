@@ -5,10 +5,7 @@ head:
       content: Embykeeper0 是一个Emby 影视服务器签到保号的自动执行工具, 提供 TG 机器人签到和 Emby 服务器保活功能.
   - - meta
     - name: keywords
-      content: Embykeeper0, Emby, 签到, 保活, Telegram, 公益服
-  - - meta
-    - name: google-site-verification
-      content: 2Rwsm1-SrtpbMLAgt249LnzWKqx2bbuNVuE-5LiU4dc
+      content: Embykeeper0, Emby, 签到, 保活, Telegram
 
 # https://vitepress.dev/reference/default-theme-home-page
 layout: home
@@ -47,12 +44,12 @@ features:
       wrap: true
     title: Telegram 机器人每日签到
     details: 模拟在 Telegram 机器人每日签到, 已支持 50+ 站点.
-  - icon: 🪐
-    title: 支持云部署
-    details: 支持 Koyeb 或 Render 免费云部署, 无需服务器, 支持网页管理.
+  - icon: 🐳
+    title: Docker 一键部署
+    details: 镜像托管于 GHCR, 一条 docker 命令即可部署, 支持 Docker Compose 与自动更新.
   - icon: 🛡️
     title: 高稳定性
-    details: 已持续开发改进 2 年, 签到和保号已尽可能与真人操作一致, 不容易被识别.
+    details: 签到和保号已尽可能与真人操作一致, 不容易被识别.
   - icon: 🔒
     title: 高安全性
     details: 代码开源, 不收集任何密钥和隐私数据.
@@ -61,14 +58,9 @@ features:
 <script setup>
 
 import TerminalExampleSection from './components/TerminalExampleSection.vue'
-import WebExampleSection from './components/WebExampleSection.vue'
 
 </script>
 
 <hr style="margin-top: 30px; margin-bottom: 30px;">
 
 <TerminalExampleSection />
-
-<hr style="margin-top: 30px; margin-bottom: 30px;">
-
-<WebExampleSection />

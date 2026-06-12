@@ -1,10 +1,10 @@
 # 这是一个配置文件范例.
 # 所有账户信息为生成, 请填写您的账户信息.
-# 查看帮助与详情: https://emby-keeper.github.io#安装与使用
+# 查看帮助与详情: https://dotracel.github.io/emby-keeper0/guide/安装指南
 
 # ================================================================================
 # Emby 保活相关设置
-# 详见: https://emby-keeper.github.io/guide/配置文件#emby-子项
+# 详见: https://dotracel.github.io/emby-keeper0/guide/配置文件#emby-子项
 # ================================================================================
 
 [emby]
@@ -20,7 +20,7 @@ concurrency = 1
 
 # ================================================================================
 # Emby 账号, 您可以重复该片段多次以增加多个账号.
-# 详见: https://emby-keeper.github.io/guide/配置文件#emby-account-子项
+# 详见: https://dotracel.github.io/emby-keeper0/guide/配置文件#emby-account-子项
 # ================================================================================
 
 [[emby.account]] # 第 1 个账号
@@ -61,7 +61,7 @@ time = [300, 600]
 
 # ================================================================================
 # Telegram 机器人签到相关设置
-# 详见: https://emby-keeper.github.io/guide/配置文件#checkiner-子项
+# 详见: https://dotracel.github.io/emby-keeper0/guide/配置文件#checkiner-子项
 # ================================================================================
 
 [checkiner]
@@ -86,7 +86,7 @@ interval_days = 1
 
 # ================================================================================
 # Telegram 账号, 您可以重复该片段多次以增加多个账号.
-# 详见: https://emby-keeper.github.io/guide/配置文件#telegram-account-子项
+# 详见: https://dotracel.github.io/emby-keeper0/guide/配置文件#telegram-account-子项
 # ================================================================================
 
 [[telegram.account]] # 第 1 个账号
@@ -112,7 +112,7 @@ checkiner = true
 # 站点相关设置
 # 当您需要禁用某些站点时, 请将该段取消注释并修改.
 # 该部分内容是根据 Embykeeper 7.6.1 生成的.
-# 详见: https://emby-keeper.github.io/guide/配置文件#site-子项
+# 详见: https://dotracel.github.io/emby-keeper0/guide/配置文件#site-子项
 # ================================================================================
 
 # 使用 "all" 代表所有签到器, "sgk" 以代表所有社工库签到器.
@@ -140,7 +140,7 @@ checkiner = true
 # ================================================================================
 # 代理相关设置
 # 代理设置, Emby 和 Telegram 均将通过此代理连接, 服务器位于国内时请配置代理并取消注释
-# 详见: https://emby-keeper.github.io/guide/配置文件#proxy-子项
+# 详见: https://dotracel.github.io/emby-keeper0/guide/配置文件#proxy-子项
 # ================================================================================
 
 # [proxy]
@@ -150,13 +150,13 @@ checkiner = true
 
 # ================================================================================
 # 日志推送相关设置
-# 详见: https://emby-keeper.github.io/guide/配置文件#notifier-子项
+# 详见: https://dotracel.github.io/emby-keeper0/guide/配置文件#notifier-子项
 # ================================================================================
 
 [notifier]
 
-# 启用签到/保活结果的日志推送:
-enabled = true
+# 启用签到/保活结果的日志推送 (设为 true 以启用, 需同时填写下方 apprise_uri):
+enabled = false
 # 使用第几个 Telegram 账号进行推送, 从 1 开始计数:
 account = 1
 # 默认情况下, 日志推送将在计划任务结束后统一推送, 设置为 false 以立刻推送
@@ -170,7 +170,7 @@ apprise_uri = ""
 
 # ================================================================================
 # Subsonic 保活相关设置 (包括 Navidrome 和其他支持 Subsonic API 的音乐服站点)
-# 详见: https://emby-keeper.github.io/guide/配置文件#subsonic-子项
+# 详见: https://dotracel.github.io/emby-keeper0/guide/配置文件#subsonic-子项
 # ================================================================================
 
 [subsonic]
@@ -186,7 +186,7 @@ concurrency = 1
 
 # ================================================================================
 # Subsonic 账号, 您可以重复该片段多次以增加多个账号, 如需使用, 请取消注释.
-# 详见: https://emby-keeper.github.io/guide/配置文件#subsonic-account-子项
+# 详见: https://dotracel.github.io/emby-keeper0/guide/配置文件#subsonic-account-子项
 # ================================================================================
 
 # [[subsonic.account]] # 第 1 个账号

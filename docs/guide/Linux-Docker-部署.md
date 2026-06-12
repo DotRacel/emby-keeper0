@@ -22,6 +22,10 @@ docker run -v $(pwd)/embykeeper:/app --rm -it --net=host ghcr.io/dotracel/emby-k
 
 随后, 再次执行命令:
 
+::: warning 注意
+首次登录有一定风控风险, 请先在手机上使用服务器所在地区的代理登录一次 Telegram 账号, 确认正常后再在服务器上使用.
+:::
+
 ```bash
 docker run -v $(pwd)/embykeeper:/app --rm -it --net=host ghcr.io/dotracel/emby-keeper0 -i
 ```
@@ -114,12 +118,12 @@ docker run -v $(pwd)/embykeeper-src:/src -v $(pwd)/embykeeper:/app --rm -it --ne
 
 您可以直接修改 `./embykeeper-src` 中的源码, 重启容器后程序将据此运行.
 
-例如, 只要您有基本的编程能力, 您就可以在 `./embykeeper-src/embykeeper/telegram/checkiner` 中按照 [教程](/guide/参与开发#每日签到站点) 提供的方式非常容易地新建一个站点的签到.
+例如, 只要您有基本的编程能力, 您就可以在 `./embykeeper-src/embykeeper/telegram/checkiner` 中按照 [教程](/guide/参与开发#扩展签到器) 提供的方式非常容易地新建一个站点的签到.
 
 ::: tip 如何更新
 
 如果您需要更新 `dev` 系列构象, 您需要直接在 `./embykeeper-src/` 目录中使用 `git pull`.
 
-::::
+:::
 
 欢迎您在实现签到器后, 通过 [Pull requests](https://github.com/DotRacel/emby-keeper0/pulls) 向 Embykeeper0 分享你的成果.
