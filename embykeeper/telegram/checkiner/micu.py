@@ -18,10 +18,28 @@ class MICUCheckin(TemplateACheckin):
     def __init__(self, *args, **kw):
         super().__init__(*args, **kw)
         self._answered = set()  # 已作答过的题目, 避免消息被编辑时重复作答
+        self._solved = False  # 是否已提交过答案
+        self._last_text = None  # 最近一条参与关键词判断的文本
 
     async def send_checkin(self, retry=False):
-        self._answered.clear()  # 每轮重试重新发送 /start, 清空上一轮的作答记录
+        # 每轮重试重新发送 /start, 清空上一轮的作答记录
+        self._answered.clear()
+        self._solved = False
         return await super().send_checkin(retry=retry)
+
+    async def on_text(self, message: Message, text: str):
+        self._last_text = text  # 供 before_success 记录被忽略的文案
+        return await super().on_text(message, text)
+
+    async def before_success(self):
+        # 点击面板签到按钮后的引导语 ("请完成下面这道题后签到") 会命中默认成功关键词.
+        # 该文本经 on_button_answer 直接进入 on_text, 无法在 message_handler 中拦截,
+        # 因此在此阻止答题前的成功判定, 否则签到器会在答案点出去之前就结束.
+        if not self._solved:
+            spec = (self._last_text or "").replace("\n", " ")
+            self.log.debug(f"[gray50]忽略答题前的成功提示: {spec}[/]")
+            return False
+        return True
 
     def get_keys(self, message: Message):
         """获得消息中所有内联按钮的文本."""
@@ -76,13 +94,15 @@ class MICUCheckin(TemplateACheckin):
                 if extract(k) == str(result):
                     self.log.info(f"解析数学题答案: {num1}{operator}{num2}={result}.")
                     await asyncio.sleep(random.uniform(1, 3))
+                    answer: BotCallbackAnswer = None
                     try:
-                        answer: BotCallbackAnswer = await message.click(k)
+                        answer = await message.click(k)
                     except TimeoutError:
                         self.log.debug(f"[gray50]点击答案无响应, 一般来说不影响签到.[/]")
                     except MessageIdInvalid:
                         pass
-                    else:
+                    self._solved = True  # 此后的成功提示才是真正的签到结果
+                    if answer is not None:
                         await self.on_button_answer(answer)
                     return
 
