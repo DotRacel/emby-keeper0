@@ -482,6 +482,7 @@ async def main(
                 pool.add(subsonic_man.run_all(instant=True), "Subsonic 保活")
             await pool.wait()
             logger.debug("启动时立刻执行签到和保活: 已完成.")
+        streams = None
         if (not once) or config.noexit:
             from .notify import start_notifier
 
